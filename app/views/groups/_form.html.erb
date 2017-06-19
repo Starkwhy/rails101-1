@@ -1,0 +1,19 @@
+<%= form_for @group do |f| %>
+<% if @group.errors.any? %>
+<ul>
+  <% @group.errors.fuil_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+</ul>
+<% end %>
+
+title
+<%= f.text_field :title %>
+<br>
+
+description
+<%= f.text_field :description %>
+<br>
+
+<%= f.submit "Sumbmit", :disable_with => 'Sumbmit...' %>
+<% end %>

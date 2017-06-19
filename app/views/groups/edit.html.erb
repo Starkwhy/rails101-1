@@ -2,27 +2,7 @@
   <h2>new desucoes</h2>
 
   <hr>
-  <%= form_for @group do |f| %>
 
-  <% if @group.errors.any? %>
-  <ul>
-    <% @group.errors.full_messages.each do |msg| %>
-      <li><% msg %></li>
-    <% end %>
-  </ul>
-  <% end %>
-
-  <br>
-
-  title
-  <%= f.text_field :title %>
-  <br>
-
-  description
-  <%= f.text_field :description %>
-  <br>
-
-  <%= f.submit "Submit", :disable_with => 'Sumbmiting...' %>
-<% end %>
+  <%= render "form" %>
 
 </div>
