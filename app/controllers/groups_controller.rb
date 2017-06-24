@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
   before_action :authenticate_user! , only: [:new, :create, :update, :destroy]
+  before_action :find_group_and_check_permission, only: [:edit, :update, :destroy]
 
   def index
     @groups = Group.all
@@ -10,11 +11,6 @@ class GroupsController < ApplicationController
   end
 
   def edit
-    @group = Group.find(params[:id])
-
-    if current_user != @group.user
-      render_to root_path, alert: "You have on permit"
-    end
   end
 
   def new
@@ -22,12 +18,6 @@ class GroupsController < ApplicationController
   end
 
   def update
-    @group = Group.find(params[:id])
-
-    if current_user != @group.user
-      render_to groups_path, alert: "You have on permission"
-    end
-
     if @group.update(group_params)
       redirect_to groups_path, notice: "update success!"
     else
@@ -47,18 +37,20 @@ class GroupsController < ApplicationController
 end
 
   def destroy
-    @group = Group.find(params[:id])
-
-    if current_user != @group.user
-      render_to groups_path, alert: "You have on permission"
-    end
-
     @group.destroy
     flash[:alert] = "delete success!"
     redirect_to groups_path
   end
 
   private
+
+  def find_group_and_check_permission
+    @group = Group.find(params[:id])
+
+    if current_user != @group.user
+      render_to group_path, alert: "You have on permission"
+    end
+  end
 
   def group_params
     params.require(:group).permit(:title, :description)
