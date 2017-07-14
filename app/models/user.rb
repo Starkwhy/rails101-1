@@ -7,4 +7,7 @@ class User < ApplicationRecord
   has_many :groups
   has_many :posts
 
+  def is_member_of?(group)
+    participated_groups.include?(group)
+  end
 end
