@@ -1,5 +1,13 @@
-<dvi>
-  <dvi>
+<dvi class="col-md-12">
+  <dvi class="group">
+
+    <span class="pull-right">
+      <% if current_user && current_user.is_member_of?(@group) %>
+        <label class="label label-success">  Is goups user </label>
+      <% else %>
+        <label class="label label-warning"> Is not groups user </label>
+      <% end %>
+    </span>
 
  <%= link_to("Write a Post", new_group_post_path(@group), class: "btn btn-default pull-right")%>
 
