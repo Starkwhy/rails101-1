@@ -11,8 +11,6 @@ class GroupsController < ApplicationController
     @posts = @group.posts.recent.paginate(:page => params[:page], :per_page => 5)
   end
 
-
-
   def edit
   end
 
